@@ -95,7 +95,7 @@ if selected_movie_title != 'None':
 
     # Display information for the selected movie
     with col2:
-        st.title(f"Movie : {selected_movie_title}")
+        st.title(f" {selected_movie_title}")
         st.subheader("Overview")
         st.write(df[df['movie_id'] == selected_movie_id]['overview'].values[0])
 

@@ -99,23 +99,28 @@ if selected_movie_title != 'None':
         st.subheader("Overview")
         st.write(df[df['movie_id'] == selected_movie_id]['overview'].values[0])
 
-        st.subheader("Genre")
-        genres_list = df[df['movie_id'] == selected_movie_id]['genres'].values[0]
-        st.write(', '.join(genres_list))
-        
-        st.subheader("Keywords")
-        keywords_list = df[df['movie_id'] == selected_movie_id]['keywords'].values[0]
-        st.write(', '.join(keywords_list))
+
+        col5, col6 = st.columns(2)
+        with col5:
+            st.subheader("Genre")
+            genres_list = df[df['movie_id'] == selected_movie_id]['genres'].values[0]
+            st.write(', '.join(genres_list))
+
+        with col6:
+            st.subheader("Keywords")
+            keywords_list = df[df['movie_id'] == selected_movie_id]['keywords'].values[0]
+            keywords_list=keywords_list[:3]
+            st.write(', '.join(keywords_list))
 
         col3, col4 = st.columns(2)
         with col3:
             st.subheader("Cast")
             cast_list = df[df['movie_id'] == selected_movie_id]['cast'].values[0]
-            st.write(', '.join(cast_list))
+            st.write(' '.join(cast_list))
         with col4:
             st.subheader("Director")
             director_list = df[df['movie_id'] == selected_movie_id]['crew'].values[0]  # Assuming the director is in the 'crew' field
-            st.write(', '.join(director_list))
+            st.write(' '.join(director_list))
     # Sentiment Analysis Section
     
 
@@ -134,10 +139,8 @@ if selected_movie_title != 'None':
             text_color = "black" if sentiment_prediction == 1 else "white"
 
             # Display review content with "Read More" expander
-            with st.expander(f"Review {i+1} by {author}"):
-                # st.write(f"Full Review: {full_content}")
-                # # Predict sentiment and display color-coded output
-                # st.markdown(f"<p style='color:{color}; font-size: 18px;'>Sentiment: {result_text}</p>", unsafe_allow_html=True)
+            with st.expander(f"Review  by {author}"):
+                
 
                 st.markdown(
                     f"<div style='background-color:{color}; padding: 10px; border-radius: 5px; color:{text_color}'>"

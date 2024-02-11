@@ -8,6 +8,8 @@ This repository contains the code for a Streamlit-based movie recommendation app
 - Fetch movie posters and details from TMDb API.
 - Display reviews for the selected movie and predict their sentiment using a pre-trained model.
 - User-friendly interface with dropdowns, images, and color-coded sentiment analysis.
+- ![ezgif com-video-to-gif-converter](https://github.com/neeraj46665/Movie-Recommendations-Sentiment-Analysis/assets/100067646/237a3de2-cdea-423c-8afd-9fb30793187b)
+
 
 ## Requirements
 

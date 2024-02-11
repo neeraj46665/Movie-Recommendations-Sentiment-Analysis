@@ -52,7 +52,7 @@ def recommend(movie, movies, similarity):
 # Function to get movie reviews from TMDb API
 def get_movie_reviews(movie_id):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/reviews'
-    params = {'api_key': 'f772f057340a7021d5fc62995e6a3f97'}
+    params = {'api_key': '{tmdb_api_key}'}
 
     response = requests.get(url, params=params)
     data = response.json()

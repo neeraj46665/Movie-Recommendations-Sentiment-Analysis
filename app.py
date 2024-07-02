@@ -7,18 +7,23 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 import os
 from dotenv import load_dotenv
+import joblib
+from prediction_model.config.config import COUNT_VECTORIZER_PATH, SIMILARITY_MATRIX_PATH, MOVIE_LIST_PATH
 
-load_dotenv()  # Load variables from .env file
-tmdb_api_key = os.getenv("TMDB_API_KEY")
+# Load variables from .env file
+tmdb_api_key = "f772f057340a7021d5fc62995e6a3f97"
 
 # Load data from the pickle file
-file_path = 'list.pkl'
-with open(file_path, 'rb') as file:
-    data = pickle.load(file)
+# file_path = 'src\prediction_model\trained_models\movie_list.pkl'
+# with open(file_path, 'rb') as file:
+#     data = joblib.load(file)
+
+data=joblib.load(r'src\prediction_model\trained_models\list.pkl')
+
 
 # Load the sentiment analysis model
-with open('sentiment_model.pkl', 'rb') as model_file:
-    tfidf_vectorizer, naive_bayes = pickle.load(model_file)
+with open(r'src\prediction_model\trained_models\sentiment_model.pkl', 'rb') as model_file:
+    tfidf_vectorizer, naive_bayes = joblib.load(model_file)
 
 def fetch_poster(movie_id):
     try:
@@ -52,7 +57,7 @@ def recommend(movie, movies, similarity):
 # Function to get movie reviews from TMDb API
 def get_movie_reviews(movie_id):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/reviews'
-    params = {'api_key': '{tmdb_api_key}'}
+    params = {'api_key': 'f772f057340a7021d5fc62995e6a3f97'}
 
     response = requests.get(url, params=params)
     data = response.json()
@@ -69,9 +74,14 @@ def predict_sentiment(review):
 df = pd.DataFrame(data)
 
 # Create TF-IDF vectorizer and calculate similarity matrix
-tfidf_vectorizer_movies = TfidfVectorizer(stop_words='english')
-tfidf_matrix_movies = tfidf_vectorizer_movies.fit_transform(df['overview'].astype(str))
-similarity_movies = linear_kernel(tfidf_matrix_movies, tfidf_matrix_movies)
+# tfidf_vectorizer_movies = TfidfVectorizer(stop_words='english')
+# tfidf_matrix_movies = tfidf_vectorizer_movies.fit_transform(df['overview'].astype(str))
+# similarity_movies = linear_kernel(tfidf_matrix_movies, tfidf_matrix_movies)
+# similarity_movies=pickle.load('model\similarity.pkl')
+# Load data from the pickle file
+file_path = r'src\prediction_model\trained_models\similarity_matrix1.pkl'
+with open(file_path, 'rb') as file:
+    similarity_movies = joblib.load(file)
 
 # Title dropdown instead of sidebar slider
 selected_movie_title = st.selectbox("Select Movie Title", ['None'] + df['title'].tolist())
@@ -126,7 +136,7 @@ if selected_movie_title != 'None':
 
     # Fetch reviews for the given movie ID
     reviews = get_movie_reviews(selected_movie_id)
-    reviews = reviews[:5]
+    reviews = reviews[:2]
     if reviews:
         st.subheader("Reviews and Sentiment Analysis:")
         for i, review in enumerate(reviews):

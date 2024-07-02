@@ -10,6 +10,12 @@ import os
 import joblib
 
 
+
+def ensure_directory(file_path):
+    directory = os.path.dirname(file_path)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
 # Load variables from .env file
 tmdb_api_key = "f772f057340a7021d5fc62995e6a3f97"
 
@@ -17,11 +23,12 @@ tmdb_api_key = "f772f057340a7021d5fc62995e6a3f97"
 # file_path = 'src\prediction_model\trained_models\movie_list.pkl'
 # with open(file_path, 'rb') as file:
 #     data = joblib.load(file)
-
+ensure_directory(r'src\prediction_model\trained_models\list.pkl')
 data=joblib.load(r'src\prediction_model\trained_models\list.pkl')
 
 
 # Load the sentiment analysis model
+ensure_directory(r'src\prediction_model\trained_models\sentiment_model.pkl')
 with open(r'src\prediction_model\trained_models\sentiment_model.pkl', 'rb') as model_file:
     tfidf_vectorizer, naive_bayes = joblib.load(model_file)
 
@@ -80,7 +87,7 @@ df = pd.DataFrame(data)
 # similarity_movies=pickle.load('model\similarity.pkl')
 # Load data from the pickle file
 
-
+ensure_directory(r'src\prediction_model\trained_models\similarity_matrix.pkl')
 file_path = r'src\prediction_model\trained_models\similarity_matrix.pkl'
 
 import gdown

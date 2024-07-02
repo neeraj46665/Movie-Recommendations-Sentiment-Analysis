@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import linear_kernel
 import os
 
 import joblib
-from prediction_model.config.config import COUNT_VECTORIZER_PATH, SIMILARITY_MATRIX_PATH, MOVIE_LIST_PATH
+
 
 # Load variables from .env file
 tmdb_api_key = "f772f057340a7021d5fc62995e6a3f97"

@@ -79,9 +79,36 @@ df = pd.DataFrame(data)
 # similarity_movies = linear_kernel(tfidf_matrix_movies, tfidf_matrix_movies)
 # similarity_movies=pickle.load('model\similarity.pkl')
 # Load data from the pickle file
-file_path = r'src\prediction_model\trained_models\similarity_matrix1.pkl'
-with open(file_path, 'rb') as file:
-    similarity_movies = joblib.load(file)
+
+
+file_path = r'src\prediction_model\trained_models\similarity_matrix.pkl'
+
+import gdown
+
+import os
+
+# Define the file ID and the destination file path
+file_id = '1WtX1aXtYr9ZoFLVM0K4Sefz7Qo3waxv6'
+destination = 'list.pkl'
+
+# Construct the download URL
+url = f'https://drive.google.com/uc?id={file_id}'
+
+# Check if the file already exists
+if not os.path.exists(destination):
+    # Download the file from Google Drive
+    gdown.download(url, destination, quiet=False)
+else:
+    print("File already exists. Skipping download.")
+
+# Load the model using joblib
+similarity_movies = joblib.load(destination)
+
+
+
+
+# with open(file_path, 'rb') as file:
+#     similarity_movies = joblib.load(file)
 
 # Title dropdown instead of sidebar slider
 selected_movie_title = st.selectbox("Select Movie Title", ['None'] + df['title'].tolist())

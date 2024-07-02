@@ -31,7 +31,7 @@ else:
     print("File already exists. Skipping download.")
 
 # Load the model using joblib
-data = joblib.load(destination)
+similarity_matrix= joblib.load(destination)
 
 # Load the sentiment analysis model
 sentiment_model_path = 'src/prediction_model/trained_models/sentiment_model.pkl'
@@ -84,11 +84,11 @@ def predict_sentiment(review):
 df = pd.DataFrame(data)
 
 # Define the path to the similarity matrix file
-similarity_matrix_path = 'src/prediction_model/trained_models/similarity_matrix.pkl'
-ensure_directory(similarity_matrix_path)
+# similarity_matrix_path = 'src/prediction_model/trained_models/similarity_matrix.pkl'
+# ensure_directory(similarity_matrix_path)
 
-# Load the similarity matrix
-similarity_movies = joblib.load(similarity_matrix_path)
+# # Load the similarity matrix
+# similarity_movies = joblib.load(similarity_matrix_path)
 
 # Title dropdown instead of sidebar slider
 selected_movie_title = st.selectbox("Select Movie Title", ['None'] + df['title'].tolist())

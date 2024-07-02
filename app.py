@@ -23,13 +23,13 @@ tmdb_api_key = "f772f057340a7021d5fc62995e6a3f97"
 # file_path = 'src\prediction_model\trained_models\movie_list.pkl'
 # with open(file_path, 'rb') as file:
 #     data = joblib.load(file)
-ensure_directory(r'src\prediction_model\trained_models\list.pkl')
-data=joblib.load(r'src\prediction_model\trained_models\list.pkl')
+ensure_directory(r'src/prediction_model/trained_models/list.pkl')
+data=joblib.load(r'src/prediction_model/trained_models/list.pkl')
 
 
 # Load the sentiment analysis model
-ensure_directory(r'src\prediction_model\trained_models\sentiment_model.pkl')
-with open(r'src\prediction_model\trained_models\sentiment_model.pkl', 'rb') as model_file:
+ensure_directory(r'src/prediction_model/trained_models/sentiment_model.pkl')
+with open(r'src/prediction_model/trained_models/sentiment_model.pkl', 'rb') as model_file:
     tfidf_vectorizer, naive_bayes = joblib.load(model_file)
 
 def fetch_poster(movie_id):

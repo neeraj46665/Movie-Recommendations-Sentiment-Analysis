@@ -6,7 +6,7 @@ from PIL import Image
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 import os
-from dotenv import load_dotenv
+
 import joblib
 from prediction_model.config.config import COUNT_VECTORIZER_PATH, SIMILARITY_MATRIX_PATH, MOVIE_LIST_PATH
 
